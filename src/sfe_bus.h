@@ -47,8 +47,12 @@
 
 
 
+#include <cstdint>
+
+#ifndef SFE_ISM330DHCX_LINUX
 #include <Wire.h>
 #include <SPI.h>
+#endif
 
 namespace sfe_ISM330DHCX {
 
@@ -66,6 +70,8 @@ class QwIDeviceBus
 		virtual int readRegisterRegion(uint8_t addr, uint8_t reg, uint8_t* data, uint16_t numBytes) = 0;
 
 };
+
+#ifndef SFE_ISM330DHCX_LINUX
 
 // The QwI2C device defines behavior for I2C implementation based around the TwoWire class (Wire).
 // This is Arduino specific. 
@@ -121,5 +127,7 @@ class SfeSPI : public QwIDeviceBus
 		SPISettings _sfeSPISettings;
 		uint8_t _cs; 
 };
+
+#endif  // SFE_ISM330DHCX_LINUX
 
 };
